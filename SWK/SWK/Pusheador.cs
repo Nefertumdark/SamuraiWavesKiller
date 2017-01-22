@@ -19,19 +19,19 @@ namespace SWK
             helpers.AddTimeSeconds(elements);
             helpers.EvaluatePosition(elements);
             helpers.EvaluateTypeMB(elements);
+            helpers.EvaluateResulr(elements);
             var delay = int.Parse(ConfigurationManager.AppSettings["msdelay"]);
             helpers.SyncTimeList(elements, delay);
         }
 
-        public void Proceso()
+        internal void Proceso(ref System.ComponentModel.BackgroundWorker m_oWorker)
         {
-            Console.WriteLine("Inicia!!!");
-            Console.WriteLine("Nota: ", elements.First().Note);
+            m_oWorker.ReportProgress(elements[0].Result);
             //Inicializar Whatcher
             for (int i = 0; i <= elements.Count; i++)
             {
-                Thread.Sleep(elements[i+1].Time - elements[i].Time);
-                Console.WriteLine(elements[i + 1].Type.ToString() + elements[i + 1].Position.ToString());
+                Thread.Sleep(elements[i + 1].Time - elements[i].Time);
+                m_oWorker.ReportProgress(elements[i + 1].Result);
             }
         }
     }

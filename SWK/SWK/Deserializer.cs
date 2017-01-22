@@ -55,7 +55,8 @@ namespace SWK
 
         public TimeSpan Time { get; set; }
         public short Position { get; set; }
-        public char Type { get; set; }
+        public char sType { get; set; }
+        public short Result { get; set; }
     }
 }
 

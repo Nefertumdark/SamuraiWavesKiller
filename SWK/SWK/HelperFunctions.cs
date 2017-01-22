@@ -8,10 +8,11 @@ namespace SWK
     public class HelperFunctions
     {
         public void AddTimeSeconds(List<EventSong> lista)
-        { 
-            foreach(var list in lista)
+        {
+            foreach (var list in lista)
             {
                 list.Time = GetMilisecontsFromTicks(list.TimeAbs);
+
             }
         }
 
@@ -30,20 +31,37 @@ namespace SWK
             }
             AddTimeSeconds(lista);
         }
-
+        /// <summary>
+        /// Función para colocar el tipo de personaje
+        /// </summary>
+        /// <param name="lista"></param>
         public void EvaluateTypeMB(List<EventSong> lista)
         {
             foreach (var list in lista)
             {
-                list.Position = 1;
+                //list.Position = 1;
+                list.sType = list.Velocity > 100 ? 'M' : 'B';
             }
         }
 
+        public void EvaluateResulr(List<EventSong> lista)
+        {
+            foreach (var list in lista)
+            {
+                //list.Position = 1;
+                list.Result = (short)((list.Position) * 10 + (list.sType == 'M' ? 1 : 2));
+            }
+        }
+
+        /// <summary>
+        /// Asigna la posición en las cooredenadas de 5 bloques de la pantalla
+        /// </summary>
+        /// <param name="lista"></param>
         public void EvaluatePosition(List<EventSong> lista)
         {
             foreach (var list in lista)
             {
-                list.Type = 'B';
+                list.Position = (short)(list.Note - 95);
             }
         }
     }
